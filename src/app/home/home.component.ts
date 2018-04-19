@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Employee } from '../models/employee';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   languages = ['English', 'Spanish', 'French', 'Other'];
+  model = new Employee( 'Darla', 'Smith', true, "w2", "English" );
+  
   constructor() { }
 
   ngOnInit() {
   }
 
+  firstNameToUpperCase( value:string ){
+    if( value.length > 0 )
+      this.model.firstName = value.charAt(0).toUpperCase() + value.slice(1);
+    else
+      this.model.firstName = value;
+  }
 }
