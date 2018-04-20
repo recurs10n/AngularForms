@@ -9,7 +9,8 @@ import { Employee } from '../models/employee';
 export class HomeComponent implements OnInit {
 
   languages = ['English', 'Spanish', 'French', 'Other'];
-  model = new Employee( 'Darla', 'Smith', true, "w2", "English" );
+  model = new Employee( 'Darla', 'Smith', true, 'w2', 'default' );
+  hasPrimaryLanguageError = false;
   
   constructor() { }
 
@@ -21,5 +22,10 @@ export class HomeComponent implements OnInit {
       this.model.firstName = value.charAt(0).toUpperCase() + value.slice(1);
     else
       this.model.firstName = value;
+  }
+
+  validatePrimaryLanguage(value)
+  {
+    this.hasPrimaryLanguageError = value === 'default';
   }
 }
