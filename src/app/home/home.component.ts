@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/employee';
+import { FormPosterService } from '../services/form-poster.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,10 @@ export class HomeComponent implements OnInit {
   model = new Employee( 'Darla', 'Smith', true, 'w2', 'default' );
   hasPrimaryLanguageError = false;
   
-  constructor() { }
+  constructor(private formPoster: FormPosterService) 
+  { 
+
+  }
 
   ngOnInit() {
   }
@@ -27,5 +32,20 @@ export class HomeComponent implements OnInit {
   validatePrimaryLanguage(value)
   {
     this.hasPrimaryLanguageError = value === 'default';
+  }
+
+  submitForm( form: NgForm ): boolean {
+    // validate form
+    this.validatePrimaryLanguage( this.model.primaryLanguage );
+    if( this.hasPrimaryLanguageError )
+      return;
+
+    this.formPoster.postEmployeeForm( this.model )
+      .subscribe(
+        data => console.log( 'success: ', data ),
+        err => { console.log( 'error: ', err ) }
+      );
+
+      return false;
   }
 }

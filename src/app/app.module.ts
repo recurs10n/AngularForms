@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { FormPosterService } from './services/form-poster.service';
+import { HttpModule } from '@angular/http';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { FormPosterService } from './services/form-poster.service';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     RouterModule.forRoot( [
       { path: 'home', component: HomeComponent },
       { path: '', redirectTo:'home', pathMatch:'full' },
